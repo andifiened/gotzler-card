@@ -24,24 +24,16 @@ export default function Home() {
 
       const client = new RetellWebClient();
 
-      client.on('call_started', () => {
-        if (mounted) setStatus('active');
-      });
-
-      client.on('call_ended', () => {
-        if (mounted) setStatus('ended');
-      });
-
+      client.on('call_started', () => setStatus('active'));
+      client.on('call_ended', () => setStatus('ended'));
       client.on('error', (err: unknown) => {
         console.error('Retell error:', err);
-        if (mounted) {
-          setStatus('error');
-          setError('Verbindungsfehler. Bitte versuche es erneut.');
-        }
+        setStatus('error');
+        setError('Verbindungsfehler. Bitte versuche es erneut.');
       });
 
       clientRef.current = client;
-      if (mounted) setReady(true);
+      setReady(true);
     })();
 
     return () => {
