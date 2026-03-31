@@ -1,0 +1,388 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg:           #070b13;
+  --surface:      #0c1120;
+  --surface-2:    #111928;
+  --border:       rgba(255, 255, 255, 0.07);
+  --border-acc:   rgba(0, 196, 255, 0.22);
+  --accent:       #00c4ff;
+  --accent-h:     #33d0ff;
+  --accent-dim:   rgba(0, 196, 255, 0.10);
+  --danger:       #ff3b30;
+  --danger-h:     #ff5549;
+  --danger-dim:   rgba(255, 59, 48, 0.13);
+  --success:      #30d158;
+  --success-dim:  rgba(48, 209, 88, 0.12);
+  --text-1:       #eaf0fa;
+  --text-2:       #8892a6;
+  --text-3:       #404e63;
+  --font:         'Inter', system-ui, -apple-system, sans-serif;
+  --r:            16px;
+  --r-sm:         8px;
+}
+
+html {
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text-1);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Subtle grid pattern */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 196, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 196, 255, 0.025) 1px, transparent 1px);
+  background-size: 56px 56px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Layout ─────────────────────────────────────────────── */
+
+.page {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding: 24px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.card {
+  width: 100%;
+  max-width: 500px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 36px 40px 32px;
+  box-shadow:
+    0 0 0 1px var(--border),
+    0 24px 80px rgba(0, 0, 0, 0.6),
+    0 0 60px rgba(0, 196, 255, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Top accent line */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--accent) 40%,
+    rgba(0, 100, 255, 0.8) 60%,
+    transparent 100%);
+  opacity: 0.5;
+}
+
+/* ─── Header ─────────────────────────────────────────────── */
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.avatar {
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  background: linear-gradient(145deg, rgba(0, 196, 255, 0.12), rgba(0, 80, 200, 0.12));
+  border: 1px solid var(--border-acc);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.5px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+.identity { flex: 1; min-width: 0; }
+
+.name {
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  color: var(--text-1);
+  line-height: 1.2;
+}
+
+.title {
+  font-size: 12.5px;
+  color: var(--text-2);
+  margin-top: 5px;
+  line-height: 1.55;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px;
+}
+
+.title-arrow { color: var(--text-3); }
+
+.title-new {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* ─── Divider ─────────────────────────────────────────────── */
+
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin-bottom: 18px;
+}
+
+/* ─── Skill Tags ──────────────────────────────────────────── */
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 20px;
+}
+
+.tag {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--text-2);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 4px 10px;
+  letter-spacing: 0.1px;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+/* ─── Intro ───────────────────────────────────────────────── */
+
+.intro {
+  font-size: 14px;
+  color: var(--text-2);
+  line-height: 1.65;
+  margin-bottom: 26px;
+}
+
+/* ─── Call Section ────────────────────────────────────────── */
+
+.call-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+/* Waveform */
+.waveform {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 28px;
+}
+
+.bar {
+  width: 3px;
+  background: var(--accent);
+  border-radius: 2px;
+  opacity: 0.75;
+  animation: wave 1.3s ease-in-out infinite;
+  animation-delay: calc(var(--i) * 90ms);
+}
+
+@keyframes wave {
+  0%, 100% { height: 4px; }
+  50%       { height: 22px; }
+}
+
+/* Status dot for active call */
+.status-dot {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  color: var(--danger);
+  font-weight: 500;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--danger);
+  animation: blink 1.4s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+/* ─── Call Button ─────────────────────────────────────────── */
+
+.btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 24px;
+  border-radius: 11px;
+  font-family: var(--font);
+  font-size: 14.5px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  position: relative;
+  letter-spacing: 0.1px;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.btn-idle,
+.btn-ended {
+  background: var(--accent);
+  color: #020a10;
+}
+
+.btn-idle:hover,
+.btn-ended:hover {
+  background: var(--accent-h);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 28px rgba(0, 196, 255, 0.28);
+}
+
+.btn-loading {
+  background: var(--surface-2);
+  color: var(--text-2);
+  border: 1px solid var(--border);
+  cursor: not-allowed;
+}
+
+.btn-active {
+  background: var(--danger);
+  color: #fff;
+  animation: pulse-ring 2s ease-out infinite;
+}
+
+.btn-active:hover {
+  background: var(--danger-h);
+}
+
+.btn-error {
+  background: var(--accent-dim);
+  color: var(--accent);
+  border: 1px solid var(--border-acc);
+}
+
+.btn-error:hover {
+  background: rgba(0, 196, 255, 0.16);
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+@keyframes pulse-ring {
+  0%   { box-shadow: 0 0 0 0px rgba(255, 59, 48, 0.45); }
+  70%  { box-shadow: 0 0 0 14px rgba(255, 59, 48, 0); }
+  100% { box-shadow: 0 0 0 0px rgba(255, 59, 48, 0); }
+}
+
+/* ─── Spinner ─────────────────────────────────────────────── */
+
+.spinner {
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ─── Status Messages ─────────────────────────────────────── */
+
+.msg {
+  width: 100%;
+  font-size: 13px;
+  text-align: center;
+  padding: 10px 14px;
+  border-radius: var(--r-sm);
+  line-height: 1.5;
+}
+
+.msg-success {
+  background: var(--success-dim);
+  color: var(--success);
+  border: 1px solid rgba(48, 209, 88, 0.2);
+}
+
+.msg-error {
+  background: var(--danger-dim);
+  color: var(--danger);
+  border: 1px solid rgba(255, 59, 48, 0.2);
+}
+
+/* ─── Footer ──────────────────────────────────────────────── */
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 11.5px;
+  color: var(--text-3);
+  text-align: center;
+  line-height: 1.5;
+}
+
+.footer-icon {
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+/* ─── Mobile ──────────────────────────────────────────────── */
+
+@media (max-width: 480px) {
+  .card {
+    padding: 28px 22px 24px;
+    border-radius: 14px;
+  }
+
+  .name  { font-size: 18px; }
+  .title { font-size: 12px; }
+  .btn   { font-size: 14px; padding: 14px 20px; }
+}
